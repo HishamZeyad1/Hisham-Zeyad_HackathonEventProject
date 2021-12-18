@@ -59,7 +59,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen>
           AppTextField(
             hint: 'Email',
             controller: _emailTextController,
-            prefixIcon: Icons.email,
+            // prefixIcon: Icons.email,
           ),
           const SizedBox(height: 15),
           ElevatedButton(

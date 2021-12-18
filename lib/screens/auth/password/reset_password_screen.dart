@@ -146,14 +146,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
           AppTextField(
             hint: 'Password',
             controller: _newPasswordTextController,
-            prefixIcon: Icons.lock,
+            // prefixIcon: Icons.lock,
             obscureText: true,
           ),
           const SizedBox(height: 10),
           AppTextField(
             hint: 'Password Confirmation',
             controller: _newPasswordConfirmationTextController,
-            prefixIcon: Icons.lock,
+            // prefixIcon: Icons.lock,
             obscureText: true,
           ),
           const SizedBox(height: 15),

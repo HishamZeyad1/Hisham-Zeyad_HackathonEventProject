@@ -9,43 +9,43 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class AuthApiController with Helpers {
-  Future<bool> register(BuildContext context,
-      {required Student student}) async {
-    var url = Uri.parse(ApiSettings.register);
-    var response = await http.post(url, body: {
-      'full_name': student.fullName,
-      'email': student.email,
-      'password': student.passsword,
-      'gender': student.gender,
-    });
-    if (response.statusCode == 201) {
-      showSnackBar(
-        context: context,
-        message: jsonDecode(response.body)['message'],
-      );
-      return true;
-    } else if (response.statusCode == 400) {
-      showSnackBar(
-        context: context,
-        message: jsonDecode(response.body)['message'],
-        error: true,
-      );
-    }
-    return false;
-  }
+  // Future<bool> register(BuildContext context,
+  //     {required Student student}) async {
+  //   var url = Uri.parse(ApiSettings.register);
+  //   var response = await http.post(url, body: {
+  //     'full_name': student.fullName,
+  //     'email': student.email,
+  //     'password': student.passsword,
+  //     'gender': student.gender,
+  //   });
+  //   if (response.statusCode == 201) {
+  //     showSnackBar(
+  //       context: context,
+  //       message: jsonDecode(response.body)['message'],
+  //     );
+  //     return true;
+  //   } else if (response.statusCode == 400) {
+  //     showSnackBar(
+  //       context: context,
+  //       message: jsonDecode(response.body)['message'],
+  //       error: true,
+  //     );
+  //   }
+  //   return false;
+  // }
 
   Future<bool> login(BuildContext context,
       {required String email, required String password}) async {
     var url = Uri.parse(ApiSettings.login);
     var response = await http.post(url, body: {
-      'email': email,
+      'mobile': email,
       'password': password,
     });
     if (response.statusCode == 200) {
       //TODO: SHARED PREFERENCES - SAVE LOGGED IN USER DATA!!
-      var jsonObject = jsonDecode(response.body)['object'];
+      var jsonObject = jsonDecode(response.body)['data'];
       Student student = Student.fromJson(jsonObject);
-      SharedPrefController().save(student: student);
+      await SharedPrefController().save(student: student);
       showSnackBar(
         context: context,
         message: jsonDecode(response.body)['message'],

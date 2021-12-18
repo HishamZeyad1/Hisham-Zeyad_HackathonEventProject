@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:elancer_api/api/api_settings.dart';
 import 'package:elancer_api/models/api_base_response.dart';
 import 'package:elancer_api/models/category.dart';
+import 'package:elancer_api/models/category_detials.dart';
 import 'package:elancer_api/models/user.dart';
+import 'package:elancer_api/prefs/shared_pref_controller.dart';
 import 'package:http/http.dart' as http;
 
 class UserApiController {
@@ -23,11 +25,54 @@ class UserApiController {
 
   Future<List<Category>> getCategories() async {
     var url = Uri.parse(ApiSettings.categories);
-    var response = await http.get(url);
+    var response = await http.get(
+      url,
+      headers: {
+        // HttpHeaders.authorizationHeader: SharedPrefController().token,
+        // HttpHeaders.authorizationHeader: "Bearer ${SharedPrefController().token}",
+        // HttpHeaders.acceptHeader: 'application/json',
+        'Accept': 'application/json',
+        'Authorization': '${SharedPrefController().token}',
+        // 'lang': SharedPrefController().language
+        // HttpHeaders.acceptLanguageHeader:SharedPrefController().language
+      },
+    );
+    print(response.statusCode);
     if (response.statusCode == 200) {
-      var categoriesJsonArray = jsonDecode(response.body)['data'] as List;
+      var categoriesJsonArray = jsonDecode(response.body)['list'] as List;
       return categoriesJsonArray
           .map((jsonObject) => Category.fromJson(jsonObject))
+          .toList();
+    }
+    return [];
+  }
+
+  Future<List<CategoryDetials>> getCategoryDetials(int id) async {
+    var url = Uri.parse(ApiSettings.categoriesdetials + id.toString());
+    var response = await http.get(
+      url,
+      headers: {
+        // HttpHeaders.authorizationHeader: SharedPrefController().token,
+        // HttpHeaders.authorizationHeader: "Bearer ${SharedPrefController().token}",
+        // HttpHeaders.acceptHeader: 'application/json',
+        'Accept': 'application/json',
+        'Authorization': '${SharedPrefController().token}',
+        // 'lang': SharedPrefController().language
+        // HttpHeaders.acceptLanguageHeader:SharedPrefController().language
+      },
+    );
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      var categoriesJsonArray;
+      categoriesJsonArray = jsonDecode(response.body)['list'] as List;
+      print(categoriesJsonArray.toString());
+      List<CategoryDetials> dd=categoriesJsonArray
+          .map((jsonObject) => CategoryDetials.fromJson(jsonObject))
+          .toList();
+      print(dd.length);
+
+      return categoriesJsonArray
+          .map((jsonObject) => CategoryDetials.fromJson(jsonObject))
           .toList();
     }
     return [];

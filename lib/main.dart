@@ -1,4 +1,5 @@
 import 'package:elancer_api/prefs/shared_pref_controller.dart';
+import 'package:elancer_api/screens/add_entries_screen.dart';
 import 'package:elancer_api/screens/auth/login_screen.dart';
 import 'package:elancer_api/screens/auth/password/forget_password_screen.dart';
 import 'package:elancer_api/screens/auth/password/reset_password_screen.dart';
@@ -23,16 +24,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: '/launch_screen',
+      debugShowCheckedModeBanner: false,
       routes: {
         '/launch_screen': (context) => LaunchScreen(),
         '/login_screen': (context) => LoginScreen(),
-        '/register_screen': (context) => RegisterScreen(),
-        '/forget_password_screen': (context) => ForgetPasswordScreen(),
-        // '/reset_password_screen': (context) => ResetPasswordScreen(),
-        '/users_screen': (context) => UsersScreen(),
+        // '/register_screen': (context) => RegisterScreen(),
+        // '/forget_password_screen': (context) => ForgetPasswordScreen(),
+        // // '/reset_password_screen': (context) => ResetPasswordScreen(),
+        // '/users_screen': (context) => UsersScreen(),
         '/categories_screen': (context) => CategoriesScreen(),
-        '/images_screen': (context) => ImagesScreen(),
-        '/upload_image_screen': (context) => UploadImageScreen(),
+        // '/images_screen': (context) => ImagesScreen(),
+        // '/upload_image_screen': (context) => UploadImageScreen(),
+        '/tableBasicsExample': (context) =>TableBasicsExample(),
       },
     );
   }

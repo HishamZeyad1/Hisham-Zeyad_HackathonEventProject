@@ -14,10 +14,10 @@ class _LaunchScreenState extends State<LaunchScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      String route = /*SharedPrefController().loggedIn
-          ? */'/categories_screen';
-          // : '/login_screen';
+    Future.delayed(const Duration(seconds: 1), () {
+      String route = SharedPrefController().loggedIn
+          ? '/categories_screen': '/login_screen';
+
       Navigator.pushReplacementNamed(context, route);
     });
   }

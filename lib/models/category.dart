@@ -1,17 +1,25 @@
 class Category {
+  // late int id;
+  // late String title;
+  // late String description;
+  // late String image;
+  // late int visible;
+  // late int productsCount;
+
   late int id;
-  late String title;
-  late String description;
+  late String nameEn;
+  late String nameAr;
+  late int active;
   late String image;
-  late int visible;
-  late int productsCount;
+  late int eventsCount;
+
 
   Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    title = json['title'];
-    description = json['description'];
+    nameEn = json['name_en'];
+    nameAr = json['name_ar'];
+    active=json['active'];
     image = json['image'];
-    visible = json['visible'];
-    productsCount = json['products_count'];
+    eventsCount = json['events_count'];
   }
 }

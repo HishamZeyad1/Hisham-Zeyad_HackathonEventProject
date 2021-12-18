@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
-  const AppTextField({
+   AppTextField({
     Key? key,
     required this.hint,
     required this.controller,
-    required this.prefixIcon,
+     // this.prefixIcon,
     this.keyboardType = TextInputType.text,
-    this.obscureText = false,
+    this.obscureText = false,this.maxline=1
   }) : super(key: key);
-
   final String hint;
   final TextInputType keyboardType;
   final TextEditingController controller;
-  final IconData prefixIcon;
+  // final IconData? prefixIcon;
   final bool obscureText;
-
+  late int maxline;
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
       obscureText: obscureText,
-      keyboardType: keyboardType,
+      keyboardType: keyboardType,maxLines: this.maxline,
       decoration: InputDecoration(
         hintText: hint,
-        prefixIcon: Icon(prefixIcon),
+        // prefixIcon: Icon(prefixIcon),
         enabledBorder: border(),
         focusedBorder: border(borderColor: Colors.blue)
       ),
@@ -37,7 +36,7 @@ class AppTextField extends StatelessWidget {
         color: borderColor,
         width: 1,
       ),
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(16),
     );
   }
 }

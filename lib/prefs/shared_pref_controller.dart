@@ -1,7 +1,7 @@
 import 'package:elancer_api/models/student.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum PrefKeys { loggedIn, fullName, email, gender, token }
+enum PrefKeys { loggedIn, name, mobile, gender, token }
 
 class SharedPrefController {
   static final SharedPrefController _instance = SharedPrefController._();
@@ -21,9 +21,9 @@ class SharedPrefController {
   Future<void> save({required Student student}) async {
     await _sharedPreferences.setBool(PrefKeys.loggedIn.toString(), true);
     await _sharedPreferences.setString(
-        PrefKeys.fullName.toString(), student.fullName);
+        PrefKeys.name.toString(), student.name);
     await _sharedPreferences.setString(
-        PrefKeys.email.toString(), student.email);
+        PrefKeys.mobile.toString(), student.mobile);
     await _sharedPreferences.setString(
         PrefKeys.gender.toString(), student.gender);
     await _sharedPreferences.setString(
