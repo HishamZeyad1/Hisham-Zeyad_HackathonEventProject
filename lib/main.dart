@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:elancer_api/prefs/shared_pref_controller.dart';
 import 'package:elancer_api/screens/add_entries_screen.dart';
 import 'package:elancer_api/screens/auth/login_screen.dart';
@@ -14,6 +16,8 @@ import 'package:flutter/material.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefController().initPref();
+  HttpOverrides.global = MyHttpOverrides();
+
   runApp(const MyApp());
 }
 
@@ -38,5 +42,12 @@ class MyApp extends StatelessWidget {
         '/tableBasicsExample': (context) =>TableBasicsExample(),
       },
     );
+  }
+}
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }

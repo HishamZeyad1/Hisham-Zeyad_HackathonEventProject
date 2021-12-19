@@ -143,7 +143,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         ),
 
                       ])),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder:(context) => CategoryDetials1(_categories[index].id),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder:(context) => CategoryDetials1(_categories[index].id,_categories[index].nameEn,_categories[index].eventsCount,_categories[index].image),
             )));
             // return Card(
             //   elevation: 4,

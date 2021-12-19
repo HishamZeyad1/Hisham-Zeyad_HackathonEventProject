@@ -4,6 +4,7 @@ import 'package:elancer_api/api/api_settings.dart';
 import 'package:elancer_api/models/api_base_response.dart';
 import 'package:elancer_api/models/category.dart';
 import 'package:elancer_api/models/category_detials.dart';
+// import 'package:elancer_api/models/category_detials.dart';
 import 'package:elancer_api/models/user.dart';
 import 'package:elancer_api/prefs/shared_pref_controller.dart';
 import 'package:http/http.dart' as http;
@@ -49,6 +50,7 @@ class UserApiController {
 
   Future<List<CategoryDetials>> getCategoryDetials(int id) async {
     var url = Uri.parse(ApiSettings.categoriesdetials + id.toString());
+    print("==========================");
     var response = await http.get(
       url,
       headers: {
@@ -61,19 +63,25 @@ class UserApiController {
         // HttpHeaders.acceptLanguageHeader:SharedPrefController().language
       },
     );
+
     print(response.statusCode);
     if (response.statusCode == 200) {
-      var categoriesJsonArray;
-      categoriesJsonArray = jsonDecode(response.body)['list'] as List;
-      print(categoriesJsonArray.toString());
-      List<CategoryDetials> dd=categoriesJsonArray
-          .map((jsonObject) => CategoryDetials.fromJson(jsonObject))
-          .toList();
-      print(dd.length);
+      var categoriesJsonArray1;
+      categoriesJsonArray1 = jsonDecode(response.body)['list'] as List;
+      print(categoriesJsonArray1.toString());
+      // try{
+      //   List<CategoryDetials> dd=categoriesJsonArray1
+      //       .map((jsonObject) => CategoryDetials.fromJson(jsonObject))
+      //       .toList().cast<CategoryDetials>();
+      //   print(dd.length);
+      // }catch(Exception){
+      //   print("===================Error==========");
+      //   print(Exception);
+      // }
 
-      return categoriesJsonArray
+      return categoriesJsonArray1
           .map((jsonObject) => CategoryDetials.fromJson(jsonObject))
-          .toList();
+          .toList().cast<CategoryDetials>();
     }
     return [];
   }
